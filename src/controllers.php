@@ -9,6 +9,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 $app->get('/', function () use ($app) {
+    $app['monolog']->info('testaaaaa');
+    $message = \Swift_Message::newInstance()
+            ->setSubject('メール送信お知らせ')
+            ->setFrom(array('kentaro_ohkouchi@lockon.co.jp' => 'Kentaro Ohkouchi'))
+            ->setTo(array('nanasess@fsm.ne.jp'))
+            ->setBody('メール送信お知らせ');
+    $app['mailer']->send($message);
+
     return $app['twig']->render('index.html', array());
 })
 ->bind('homepage')
