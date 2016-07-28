@@ -6,8 +6,9 @@ class controllersTest extends WebTestCase
     {
         $client = $this->createClient();
         $client->followRedirects(true);
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $crawler = $client->request('GET', '/');
+            error_log('.');
             $this->assertTrue($client->getResponse()->isOk());
         }
     }
